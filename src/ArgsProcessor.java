@@ -27,7 +27,7 @@ public class ArgsProcessor {
 
             currentHero = new HeroDefense(heroName, heroHealth, heroAttackPoint, MAXHEALTH, EXPERIENCE, LEVEL, ENNEMIESKILLED);
         } else {
-            currentHero = new Hero(heroName, heroHealth, heroAttackPoint, MAXHEALTH, EXPERIENCE, LEVEL, ENNEMIESKILLED);
+            currentHero = new HeroEquilibre(heroName, heroHealth, heroAttackPoint, MAXHEALTH, EXPERIENCE, LEVEL, ENNEMIESKILLED);
         }
 
         for (int actions = heroActionsIdx; actions < phrase.length; actions++) {
@@ -59,6 +59,7 @@ public class ArgsProcessor {
                     int heroEnemiesKilled = hero.getEnemiesKilled();
                     int heroNextLevel = hero.getLevel() + 1;
                     int heroExperienceNeeded = hero.computeExperienceRequired(heroNextLevel);
+                    int heroAttackPoints = hero.getAttackPoint();
 
                     int enemyHealth = (heroEnemiesKilled * 10) + 100;
                     int enemyMaxHealth = enemyHealth;
@@ -68,10 +69,10 @@ public class ArgsProcessor {
                     Enemy enemy = new Enemy(enemyHealth, enemyMaxHealth, enemyAttackPoints, enemyExperienceDrop);
 
                     while (hero.getHealth() > 0 && enemy.getHealth() > 0) {
-                        hero.attack(enemy);
+                        hero.receiveDamage(heroAttackPoints);
 
                         if (enemy.getHealth() > 0) { // in case the enemy's health drops below zero before the end of the round.
-                            enemy.attack(hero);
+                            hero.attackEnemy(enemy);
                         }
 
                     }

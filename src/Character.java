@@ -6,18 +6,15 @@ public abstract class Character {
         this.maxHealth = maxHealth;
         this.attackPoint = attackPoint;
     }
-
     public void setHealth( int health ){
         this.health = health;
     }
-    public void setMaxHealth( int maxHealth ){
+    public void setMaxHealth(int maxHealth){
         this.maxHealth = maxHealth;
     }
-
-    public void setAttackPoint( int attackPoint ){
+    public void setAttackPoint(int attackPoint){
         this.attackPoint = attackPoint;
     }
-
     public int getHealth(){
         return this.health;
     }
@@ -27,9 +24,5 @@ public abstract class Character {
     public int getAttackPoint(){
         return this.attackPoint;
     }
-
-    abstract void attack(Character character); // method to attack characters in general
-    static void fight(Character characterOne, Character characterTwo){
-
-    };
+    abstract void receiveDamage(int attackPoints);
 }

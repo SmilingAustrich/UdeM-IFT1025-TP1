@@ -1,8 +1,8 @@
 
-public class Hero extends Character {
+public abstract class Hero extends Character {
     private int experience, level, enemiesKilled;
     private String heroName;
-    public Hero(String heroName, int health, int attackPoint, int maxHealth, int experience, int level, int enemiesKilled ) {
+    public Hero(String heroName, int health, int attackPoint, int maxHealth, int experience, int level, int enemiesKilled) {
         super(health, maxHealth, attackPoint);
         this.experience = experience;
         this.level = level;
@@ -64,12 +64,6 @@ public class Hero extends Character {
     public int getLevel(){
         return this.level;
     };
-    @Override
-    public void attack( Character enemy ){
-        int health = enemy.getHealth();
-        int newHealth = health - this.getAttackPoint();
-        enemy.setHealth( newHealth );
-    }
     public int computeExperienceRequired( int level ){
         int experienceRequired = 50 + level * 20 * (int)Math.pow(1.1,level);
         return experienceRequired;
@@ -90,4 +84,5 @@ public class Hero extends Character {
         }
 
     }
+    abstract void attackEnemy(Enemy enemy); // method to attack enemies in general
 }
