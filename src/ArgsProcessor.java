@@ -18,7 +18,6 @@ public class ArgsProcessor {
         }
 
         System.out.println(currentHero); // Play! output
-
     }
 
     private static String[] makePhrase(String args) {
@@ -34,7 +33,6 @@ public class ArgsProcessor {
         switch (phrase[0]) {
             case "fought":
                 int nbrEnemiesToFight = Integer.parseInt(phrase[1]);
-
                 Play.fight(nbrEnemiesToFight, hero);
                 break;
             case "rested":
@@ -43,12 +41,12 @@ public class ArgsProcessor {
                 break;
             case "healed":
                 int healthPoints = Integer.parseInt(phrase[1]);
-
                 Play.healed(healthPoints, hero);
+
                 break;
             case "trained":
-                int attackPoints = Integer.parseInt(phrase[3]);
 
+                int attackPoints = Integer.parseInt(phrase[3]);
                 Play.trained(attackPoints,hero);
                 break;
         }

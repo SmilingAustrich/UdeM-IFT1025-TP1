@@ -2,7 +2,8 @@
 public abstract class Hero extends Character {
     private int experience, level, enemiesKilled;
     private String heroName;
-    public Hero(String heroName, int health, int attackPoint, int maxHealth, int experience, int level, int enemiesKilled, boolean isAlive) {
+    public Hero(String heroName, int health, int attackPoint, int maxHealth, int experience, int level,
+                int enemiesKilled, boolean isAlive) {
         super(health, attackPoint, maxHealth, isAlive);
         this.experience = experience;
         this.level = level;
@@ -11,26 +12,27 @@ public abstract class Hero extends Character {
     }
     @Override
     public String toString(){
-//        return "health: " + this.getHealth() +"level: " + this.level + " experience: " + this.experience + " Enemies Killed: " + this.enemiesKilled;
-
 
         if(this.getEnemiesKilled() > 1){
 
             if( this.getHealth() <= 0 ){
-                return "In his quest, " + this.getHeroName() + " died after beating " + this.getEnemiesKilled() + " enemies and attaining level "
-                        + this.getLevel() +"!";
+                return "In his quest, " + this.getHeroName() + " died after beating " + this.getEnemiesKilled()
+                        + " enemies and attaining level " + this.getLevel() +"!";
             }
             else {
-                return "In his quest, " + this.getHeroName() + " beat " + this.getEnemiesKilled() + " enemies, attained level "
-                        + this.getLevel() + " and survived with " + this.getHealth() + " HP!";
+                return "In his quest, " + this.getHeroName() + " beat " + this.getEnemiesKilled()
+                        + " enemies, attained level " + this.getLevel() + " and survived with "
+                        + this.getHealth() + " HP!";
             }
         }else {
             if( this.getHealth() <= 0 ){
-                return "In his quest, " + this.getHeroName()+ " died after beating " + this.getEnemiesKilled() + " enemy and attaining level "
-                        + this.getLevel() +"!";
+                return "In his quest, " + this.getHeroName()+ " died after beating " + this.getEnemiesKilled()
+                        + " enemy and attaining level " + this.getLevel() +"!";
             }else{
-                return "In his quest, " + this.getHeroName() + " beat " + this.getEnemiesKilled() + " enemy, attained level "
-                        + this.getLevel() + " and survived with " + this.getHealth() + " HP!";
+
+                return "In his quest, " + this.getHeroName() + " beat " + this.getEnemiesKilled()
+                        + " enemy, attained level " + this.getLevel() + " and survived with "
+                        + this.getHealth() + " HP!";
             }
 
         }
@@ -38,13 +40,15 @@ public abstract class Hero extends Character {
     public void setHeroName(String name){
         this.heroName = name;
     }
-    public void incrementEnemiesKilled(){
+    public void incrementKillCount(){
         this.enemiesKilled++;
     }
     public void setExperience( int experience ){
         this.experience = experience;
-    };
-    public void setLevel( int level ){this.level = level;};
+    }
+
+    public void setLevel( int level ){this.level = level;}
+
     public String getHeroName(){
         return this.heroName;
     }
@@ -53,24 +57,26 @@ public abstract class Hero extends Character {
     }
     public int getExperience(){
         return this.experience;
-    };
+    }
+
     public int getLevel(){
         return this.level;
-    };
-    public int computeExperienceRequired( int level ){
-        int experienceRequired = (int)Math.ceil((50 + level * 20 * Math.pow(1.1,level)));
-        return experienceRequired;
+    }
+
+    public int computeExperienceRequired(int level){
+
+        return (int)Math.ceil((50 + level * 20 * Math.pow(1.1,level)));
     }
     public void incrementLevel(){
 
         int nextLevel = this.getLevel() + 1;
 
         if( nextLevel <= 99){
-            int nextAttackPoint = this.getAttackPoint() + 6;
+            int nextAttackPoint = this.getAttackPoints() + 6;
             int nextMaxHealth = this.getMaxHealth() + 12;
 
             this.setLevel(nextLevel);
-            this.setAttackPoint(nextAttackPoint);
+            this.setAttackPoints(nextAttackPoint);
             this.setMaxHealth(nextMaxHealth);
             this.setHealth(nextMaxHealth);
             this.setExperience(0);
