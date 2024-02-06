@@ -10,7 +10,7 @@ public class HeroEquilibre extends Hero{
     @Override
     public void attackEnemy(Enemy enemy){
         int health = enemy.getHealth();
-        int newHealth = health - this.getAttackPoint(); //  degats = 1/2 x points d'attaque normaux
+        int newHealth = health - this.getAttackPoint();
         enemy.setHealth( newHealth );
     }
 

@@ -7,8 +7,8 @@ public class HeroAttack extends Hero{
     @Override
     public void attackEnemy( Enemy enemy ){
         int health = enemy.getHealth();
-        int newHealth = health - ( 2 * this.getAttackPoint() ); //  degats = 2 x points d'attaque normaux
-        enemy.setHealth( newHealth );
+        int newHealth = health - (2 * this.getAttackPoint());
+        enemy.setHealth(newHealth);
     }
     public void receiveDamage(int attackPoints){
         int newHealth = this.getHealth() - (2 * attackPoints);

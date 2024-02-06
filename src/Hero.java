@@ -24,9 +24,7 @@ public abstract class Hero extends Character {
                 return "In his quest, " + this.getHeroName() + " beat " + this.getEnemiesKilled() + " enemies, attained level "
                         + this.getLevel() + " and survived with " + this.getHealth() + " HP!";
             }
-
-        }else{
-
+        }else {
             if( this.getHealth() <= 0 ){
                 return "In his quest, " + this.getHeroName()+ " died after beating " + this.getEnemiesKilled() + " enemy and attaining level "
                         + this.getLevel() +"!";
@@ -36,8 +34,6 @@ public abstract class Hero extends Character {
             }
 
         }
-
-
     }
     public void setHeroName(String name){
         this.heroName = name;
@@ -48,10 +44,7 @@ public abstract class Hero extends Character {
     public void setExperience( int experience ){
         this.experience = experience;
     };
-    public void setLevel( int level ){
-
-        this.level = level;
-    };
+    public void setLevel( int level ){this.level = level;};
     public String getHeroName(){
         return this.heroName;
     }
@@ -65,7 +58,7 @@ public abstract class Hero extends Character {
         return this.level;
     };
     public int computeExperienceRequired( int level ){
-        int experienceRequired = 50 + level * 20 * (int)Math.pow(1.1,level);
+        int experienceRequired = (int)Math.ceil((50 + level * 20 * Math.pow(1.1,level)));
         return experienceRequired;
     }
     public void incrementLevel(){
@@ -76,10 +69,10 @@ public abstract class Hero extends Character {
             int nextAttackPoint = this.getAttackPoint() + 6;
             int nextMaxHealth = this.getMaxHealth() + 12;
 
-            this.setLevel( nextLevel );
-            this.setAttackPoint( nextAttackPoint);
-            this.setMaxHealth( nextMaxHealth);
-            this.setHealth( nextMaxHealth );
+            this.setLevel(nextLevel);
+            this.setAttackPoint(nextAttackPoint);
+            this.setMaxHealth(nextMaxHealth);
+            this.setHealth(nextMaxHealth);
             this.setExperience(0);
         }
 

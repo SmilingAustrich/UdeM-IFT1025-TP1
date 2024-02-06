@@ -51,68 +51,22 @@ public class ArgsProcessor {
         // le type d'action est déterminé par le premier mot de la phrase
         switch (phrase[0]) {
             case "fought":
-
                 int nbrEnemiesToFight = Integer.parseInt(phrase[1]);
 
-                for (int i = 0; i < nbrEnemiesToFight; i++) {
-
-                    int heroEnemiesKilled = hero.getEnemiesKilled();
-                    int heroNextLevel = hero.getLevel() + 1;
-                    int heroExperienceNeeded = hero.computeExperienceRequired(heroNextLevel);
-                    int heroAttackPoints = hero.getAttackPoint();
-
-                    int enemyHealth = (heroEnemiesKilled * 10) + 100;
-                    int enemyMaxHealth = enemyHealth;
-                    int enemyAttackPoints = (heroEnemiesKilled * 5) + 25;
-                    int enemyExperienceDrop = (heroEnemiesKilled * 8) + 35;
-
-                    Enemy enemy = new Enemy(enemyHealth, enemyMaxHealth, enemyAttackPoints, enemyExperienceDrop);
-
-                    while (hero.getHealth() > 0 && enemy.getHealth() > 0) {
-                        hero.receiveDamage(heroAttackPoints);
-
-                        if (enemy.getHealth() > 0) { // in case the enemy's health drops below zero before the end of the round.
-                            hero.attackEnemy(enemy);
-                        }
-
-                    }
-
-                    if (enemy.getHealth() > 0) {
-
-                        return false;
-
-                    } else {
-
-                        int heroUpdatedExperience = enemyExperienceDrop + hero.getExperience();
-
-                        hero.setExperience(heroUpdatedExperience);
-                        hero.incrementEnemiesKilled();
-
-                        if (heroUpdatedExperience >= heroExperienceNeeded) {
-                            hero.incrementLevel();
-                        }
-
-                    }
-                }
-
+                Play.fight(nbrEnemiesToFight, hero);
                 break;
             case "rested":
-                //TODO : Handle the resting, add points to Health
-                int maxHealth = hero.getMaxHealth();
-                hero.setHealth(maxHealth);
+                Play.rested(hero);
                 break;
             case "healed":
-                //TODO : Handle the healing
                 int healthPoints = Integer.parseInt(phrase[1]);
-                int heroUpdatedHealth = hero.getHealth() + healthPoints;
 
-                hero.setHealth(heroUpdatedHealth);
+                Play.healed(healthPoints, hero);
                 break;
             case "trained":
-                //TODO : Handle the training
                 int attackPoints = Integer.parseInt(phrase[3]);
-                int heroUpdatedAtkPoints = hero.getAttackPoint() + attackPoints;
-                hero.setAttackPoint(heroUpdatedAtkPoints);
+
+                Play.trained(attackPoints,hero);
                 break;
         }
         return true;
