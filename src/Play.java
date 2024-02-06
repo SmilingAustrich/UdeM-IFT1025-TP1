@@ -54,4 +54,35 @@ public abstract class Play {
         int heroUpdatedAtkPoints = hero.getAttackPoint() + attackPoints;
         hero.setAttackPoint(heroUpdatedAtkPoints);
     }
+
+    public static Hero createHero(String[] phrase){
+        Hero currentHero;
+        String heroName = phrase[0];
+        int heroHealth = Integer.parseInt(phrase[1]);
+
+        int heroAttackPoint = Integer.parseInt(phrase[2]);
+
+        // TODO: are theses variables constants?
+        int EXPERIENCE = 0;
+        int MAXHEALTH = heroHealth;
+        int LEVEL = 1;
+        int ENNEMIESKILLED = 0;
+
+        boolean isAlive = true;
+
+
+        if (heroName.toLowerCase().startsWith("a")) {
+
+            currentHero = new HeroAttack(heroName, heroHealth, heroAttackPoint, MAXHEALTH, EXPERIENCE, LEVEL, ENNEMIESKILLED, isAlive);
+
+        } else if (heroName.toLowerCase().startsWith("d")) {
+
+            currentHero = new HeroDefense(heroName, heroHealth, heroAttackPoint, MAXHEALTH, EXPERIENCE, LEVEL, ENNEMIESKILLED, isAlive);
+        } else {
+            currentHero = new HeroEquilibre(heroName, heroHealth, heroAttackPoint, MAXHEALTH, EXPERIENCE, LEVEL, ENNEMIESKILLED, isAlive);
+        }
+
+        return currentHero;
+    }
+
 }
