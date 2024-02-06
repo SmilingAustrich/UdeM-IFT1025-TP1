@@ -1,8 +1,8 @@
 public class Enemy extends Character{
 
     private int experienceDrop;
-    public Enemy(int health, int maxHealth, int attackpoint, int experienceDrop){
-        super(health, maxHealth, attackpoint);
+    public Enemy(int health, int maxHealth, int attackpoint, int experienceDrop,boolean isAlive){
+        super(health, maxHealth, attackpoint, isAlive);
         this.experienceDrop = experienceDrop;
 
     }

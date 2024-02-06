@@ -2,7 +2,6 @@ public abstract class Play {
 
     public static boolean fight(int nbrEnemiesToFight, Hero hero) {
 
-
         for (int i = 0; i < nbrEnemiesToFight; i++) {
 
             int heroEnemiesKilled = hero.getEnemiesKilled();
@@ -13,13 +12,19 @@ public abstract class Play {
             int enemyMaxHealth = enemyHealth;
             int enemyAttackPoints = (heroEnemiesKilled * 5) + 25;
             int enemyExperienceDrop = (heroEnemiesKilled * 8) + 35;
+            boolean enemyIsAlive = true;
 
-            Enemy enemy = new Enemy(enemyHealth, enemyMaxHealth, enemyAttackPoints, enemyExperienceDrop);
+            Enemy enemy = new Enemy(enemyHealth, enemyMaxHealth, enemyAttackPoints, enemyExperienceDrop, enemyIsAlive);
 
-            while (hero.getHealth() > 0) {
-                hero.attackEnemy(enemy);
+            while (hero.IsAlive()) {
+                hero.attack(enemy);
+
+                if (!enemy.IsAlive()){
+                    break;
+                }
                 hero.receiveDamage(enemyAttackPoints);
-                if(hero.getHealth() <= 0){
+
+                if(!hero.IsAlive()){
                     return false;
                 }
             }
