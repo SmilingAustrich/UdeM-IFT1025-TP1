@@ -1,10 +1,9 @@
 public class Enemy extends Character {
     private int experienceDrop;
 
-    public Enemy(int health, int maxHealth, int attackPoints, int experienceDrop, boolean isAlive) {
-        super(health, maxHealth, attackPoints, isAlive);
+    public Enemy(int health, int attackPoints, int maxHealth, int experienceDrop, boolean isAlive) {
+        super(health, attackPoints, maxHealth, isAlive);
         this.experienceDrop = experienceDrop;
-
     }
 
     public int getExperienceDrop() {
@@ -19,4 +18,5 @@ public class Enemy extends Character {
         int newHealth = this.getHealth() - attackPoints;
         this.setHealth(newHealth);
     }
+
 }

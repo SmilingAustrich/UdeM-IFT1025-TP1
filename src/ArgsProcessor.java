@@ -2,8 +2,6 @@ public class ArgsProcessor {
     public static void process(String[] args) {
         String[] phrase = makePhrase(args[0]);
 
-        //TODO : Handle the phrase and output the result
-
         Hero currentHero = Play.createHero(phrase);
 
         int arraySize = phrase.length - 1;
@@ -33,21 +31,25 @@ public class ArgsProcessor {
         switch (phrase[0]) {
             case "fought":
                 int nbrEnemiesToFight = Integer.parseInt(phrase[1]);
-                Play.fight(nbrEnemiesToFight, hero);
+
+                for( int i = 0; i < nbrEnemiesToFight; i++){
+                Enemy enemy = Play.createEnemy(hero); // A new enemy is instantiated for every iteration, with new stats
+                Character.fight(hero, enemy);
+                }
                 break;
             case "rested":
 
-                Play.rested(hero);
+                Hero.rested(hero);
                 break;
             case "healed":
                 int healthPoints = Integer.parseInt(phrase[1]);
-                Play.healed(healthPoints, hero);
+                Hero.healed(healthPoints, hero);
 
                 break;
             case "trained":
 
                 int attackPoints = Integer.parseInt(phrase[3]);
-                Play.trained(attackPoints,hero);
+                Hero.trained(attackPoints,hero);
                 break;
         }
         return true;

@@ -1,6 +1,7 @@
 
 public abstract class Hero extends Character {
     private int experience, level, enemiesKilled;
+
     private String heroName;
     public Hero(String heroName, int health, int attackPoint, int maxHealth, int experience, int level,
                 int enemiesKilled, boolean isAlive) {
@@ -46,9 +47,7 @@ public abstract class Hero extends Character {
     public void setExperience( int experience ){
         this.experience = experience;
     }
-
-    public void setLevel( int level ){this.level = level;}
-
+    public void setLevel( int level ){this.level = level;};
     public String getHeroName(){
         return this.heroName;
     }
@@ -57,15 +56,13 @@ public abstract class Hero extends Character {
     }
     public int getExperience(){
         return this.experience;
-    }
-
+    };
     public int getLevel(){
         return this.level;
-    }
-
+    };
     public int computeExperienceRequired(int level){
 
-        return (int)Math.ceil((50 + level * 20 * Math.pow(1.1,level)));
+        return  (int)Math.ceil((50 + level * 20 * Math.pow(1.1,level)));
     }
     public void incrementLevel(){
 
@@ -81,7 +78,33 @@ public abstract class Hero extends Character {
             this.setHealth(nextMaxHealth);
             this.setExperience(0);
         }
+    }
+    public void levelUp( Enemy enemy) {
 
+        int heroExperienceNeeded = this.computeExperienceRequired(this.getLevel() + 1);
+
+        int heroUpdatedExperience = enemy.getExperienceDrop() + this.getExperience();
+        this.setExperience(heroUpdatedExperience);
+
+        if (heroUpdatedExperience >= heroExperienceNeeded) {
+            this.incrementLevel();
+
+        }
+    }
+
+    public static void rested(Hero hero) {
+        int maxHealth = hero.getMaxHealth();
+        hero.setHealth(maxHealth);
+    }
+
+    public static void healed(int healthPoints, Hero hero) {
+        int heroUpdatedHealth = hero.getHealth() + healthPoints;
+        hero.setHealth(heroUpdatedHealth);
+    }
+
+    public static void trained(int attackPoints, Hero hero) {
+        int heroUpdatedAtkPoints = hero.getAttackPoints() + attackPoints;
+        hero.setAttackPoints(heroUpdatedAtkPoints);
     }
     abstract void attack(Enemy enemy); // method to attack enemies in general
 }
