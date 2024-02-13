@@ -4,13 +4,8 @@ public class ArgsProcessor {
 
         Hero currentHero = Play.createHero(phrase);
 
-        int arraySize = phrase.length - 1;
-        // We substract 3 from the arraySize to start right after the first 3 arguments
-        // which are the Hero's name, health and attack points
-        int heroActionsIdx = arraySize - 3;
-
-        for (int actions = heroActionsIdx; actions < phrase.length; actions++) {
-            if (currentHero.IsAlive()) {
+        for (int actions = 3; actions < phrase.length; actions++) {
+            if (currentHero.isAlive()) {
                 ArgsProcessor.doAction(phrase[actions], currentHero);
             }
         }
@@ -22,34 +17,35 @@ public class ArgsProcessor {
         return args.trim().split(",");
     }
 
-    // méthode qui prend la partie de la phrase qui décrit l'action et le héros, puis effectue l'action correspondante
-    // retourne true si le joueur survit à l'action, false sinon
+    /**
+     * Static method to create a Hero.
+     * @param action the actions that the hero will perform.
+     * @param hero the hero that will perform the actions.
+     * @return true as long as the hero is still alive.
+     */
     private static boolean doAction(String action, Hero hero) {
-        // ici, on transforme le String action en un tableau de String, en séparant les mots par des espaces
+        // Here, we are transforming the String action into an array of Strings by splitting the words with spaces.
         String[] phrase = action.trim().split(" ");
-        // le type d'action est déterminé par le premier mot de la phrase
+        // The type of the action is determinated by the first word of the variable "phrase".
         switch (phrase[0]) {
             case "fought":
                 int nbrEnemiesToFight = Integer.parseInt(phrase[1]);
-
                 for( int i = 0; i < nbrEnemiesToFight; i++){
-                Enemy enemy = Play.createEnemy(hero); // A new enemy is instantiated for every iteration, with new stats
-                Character.fight(hero, enemy);
+                // A new enemy is instantiated for every iteration, with new stats
+                Enemy enemy = Play.createEnemy(hero.getEnemiesKilled());
+                Character.fight(hero, enemy); // The hero keeps fights "nbrEnemiesToFight" enemies.
                 }
                 break;
             case "rested":
-
-                Hero.rested(hero);
+                hero.setHealth(hero.getMaxHealth()); // The hero regenerates his health back to max
                 break;
             case "healed":
                 int healthPoints = Integer.parseInt(phrase[1]);
-                Hero.healed(healthPoints, hero);
-
+                hero.setHealth(hero.getHealth() + healthPoints); // The hero regenerates n healths points.
                 break;
             case "trained":
-
                 int attackPoints = Integer.parseInt(phrase[3]);
-                Hero.trained(attackPoints,hero);
+                hero.setAttackPoints(hero.getAttackPoints() + attackPoints); // The hero gains n attack points.
                 break;
         }
         return true;

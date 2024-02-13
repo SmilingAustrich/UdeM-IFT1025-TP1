@@ -38,31 +38,28 @@ public abstract class Hero extends Character {
 
         }
     }
+    // Getters and setters for the instance variables.
     public void setHeroName(String name){
         this.heroName = name;
-    }
-    public void incrementKillCount(){
-        this.enemiesKilled++;
     }
     public void setExperience( int experience ){
         this.experience = experience;
     }
-    public void setLevel( int level ){this.level = level;};
+    public void setLevel( int level ){this.level = level;}
     public String getHeroName(){
         return this.heroName;
     }
-    public int getEnemiesKilled(){
-        return this.enemiesKilled;
-    }
-    public int getExperience(){
-        return this.experience;
-    };
+    public int getEnemiesKilled(){ return this.enemiesKilled;}
+    public int getExperience(){return this.experience;}
     public int getLevel(){
         return this.level;
-    };
+    }
+    public void incrementKillCount(){
+        this.enemiesKilled++;
+    }
     public int computeExperienceRequired(int level){
 
-        return  (int)Math.ceil((50 + level * 20 * Math.pow(1.1,level)));
+        return (int)Math.ceil((50 + level * 20 * Math.pow(1.1,level)));
     }
     public void incrementLevel(){
 
@@ -90,21 +87,6 @@ public abstract class Hero extends Character {
             this.incrementLevel();
 
         }
-    }
-
-    public static void rested(Hero hero) {
-        int maxHealth = hero.getMaxHealth();
-        hero.setHealth(maxHealth);
-    }
-
-    public static void healed(int healthPoints, Hero hero) {
-        int heroUpdatedHealth = hero.getHealth() + healthPoints;
-        hero.setHealth(heroUpdatedHealth);
-    }
-
-    public static void trained(int attackPoints, Hero hero) {
-        int heroUpdatedAtkPoints = hero.getAttackPoints() + attackPoints;
-        hero.setAttackPoints(heroUpdatedAtkPoints);
     }
     abstract void attack(Enemy enemy); // method to attack enemies in general
 }

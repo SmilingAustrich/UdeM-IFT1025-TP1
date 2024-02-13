@@ -8,10 +8,8 @@ public abstract class Character {
         this.attackPoint = attackPoint;
         this.isAlive = isAlive;
     }
-    public void setHealth( int health ){
-        this.health = health;
-
-    }
+    // Getters and setters for the instance variables.
+    public void setHealth( int health ){ this.health = health; }
     public void setMaxHealth(int maxHealth){
         this.maxHealth = maxHealth;
     }
@@ -30,30 +28,51 @@ public abstract class Character {
     public int getAttackPoints(){
         return this.attackPoint;
     }
-    public boolean IsAlive(){
+    // this is a method that returns a boolean, indicating the state of the Character's life.
+    public boolean isAlive(){
+        if(this.health <= 0){
+            this.setIsAlive(false); // Update the state of the character if he is dead.
+
+        }
         return this.health > 0;
     }
+
+    /**
+     * Inflicts damage to the character.
+     * The amount of damage inflicted depends on the type of character.
+     * @param attackPoints the amount of damage to be inflicted
+     */
     abstract void receiveDamage(int attackPoints);
 
+    /**
+     * Static method to initiate a fight between a hero and an enemy.
+     * @param currentHero the hero that is fighting.
+     * @param enemy the opponent of the hero.
+     * @return true if the hero wins and false otherwise.
+     */
     public static boolean fight(Hero currentHero, Enemy enemy) {
 
+        while (currentHero.isAlive()) { // while loop to initiate fight
+            currentHero.attack(enemy);  // enemy attacks first
 
-        while (currentHero.IsAlive()) { // while loop to initiate fight
-            currentHero.attack(enemy);
-
-            if (!enemy.IsAlive()) { // We check if the enemy is still alive before attacking the hero.
-                break;
+            if (!enemy.isAlive()) { // We check if the enemy is still alive before attacking the hero.
+                break;              // if the enemy is dead, the hero wins the fight
             }
 
             currentHero.receiveDamage(enemy.getAttackPoints()); // Enemy attacks the hero
 
-            if (!currentHero.IsAlive()) { // if the hero is dead, we stop the fight and return false
+            if (!currentHero.isAlive()) { // if the hero is dead, we stop the fight and return false
                 return false;
             }
         }
+        if (!currentHero.isAlive()){
+            return false;
+        }else
+        {
         currentHero.incrementKillCount(); // increment the kill counter
         currentHero.levelUp(enemy); // if we can level up, we level up!
         return true;
+        }
     }
 
 }

@@ -7,12 +7,12 @@ public class HeroDefense extends Hero {
     @Override
     public void attack(Enemy enemy) {
         int health = enemy.getHealth();
-        int newHealth = (int) (health - (0.5 * this.getAttackPoints())); //  attaque = 1/2 x points d'attaque normaux
+        int newHealth = (int)Math.ceil((health - 0.5 * this.getAttackPoints())); //  attaque = 1/2 x points d'attaque normaux
         enemy.setHealth(newHealth);
     }
 
     public void receiveDamage(int attackPoints) {
-        int newHealth = (int) (this.getHealth() - (0.5 * attackPoints)); //  degats = 1/2 x points d'attaque normaux
+        int newHealth = (int)Math.ceil((this.getHealth() - 0.5 * attackPoints)); //  degats = 1/2 x points d'attaque normaux
         this.setHealth(newHealth);
     }
 }
