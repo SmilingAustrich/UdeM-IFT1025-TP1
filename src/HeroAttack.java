@@ -5,13 +5,21 @@ public class HeroAttack extends Hero {
     }
 
     @Override
+    /**
+     * Each hero handles attacks differently, so we need to override the method for every type of hero.
+     * @param enemy the opponent.
+     */
     public void attack(Enemy enemy) {
         int health = enemy.getHealth();
         int newHealth = health - (2 * this.getAttackPoints());
 
         enemy.setHealth(newHealth);
     }
-
+    /**
+     * Each hero handles receiving damage differently, so we need to override the method for every type of hero.
+     * HeroAttack gets inflicted double damage.
+     * @param attackPoints the damage to be inflicted to the hero.
+     */
     public void receiveDamage(int attackPoints) {
         int newHealth = this.getHealth() - (2 * attackPoints);
         this.setHealth(newHealth);
