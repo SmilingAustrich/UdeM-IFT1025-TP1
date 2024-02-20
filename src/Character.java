@@ -70,7 +70,7 @@ public abstract class Character {
         }else
         {
         currentHero.incrementKillCount(); // increment the kill counter
-        currentHero.levelUp(enemy); // if we can level up, we level up!
+        currentHero.levelUp(enemy.getExperienceDrop()); // if we can level up, we level up!
         return true;
         }
     }

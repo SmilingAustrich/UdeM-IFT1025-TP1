@@ -6,12 +6,13 @@ public class HeroDefense extends Hero {
 
     @Override
     /**
-     * Each hero handles attacks differently, so we need to override the method for every type of hero.
+     * Each character handles attacks differently, so we need to override the method for every type of hero.
+     * HeroDefense's attack = 1/2 x attack points
      * @param enemy the opponent.
      */
     public void attack(Enemy enemy) {
         int health = enemy.getHealth();
-        int newHealth = (int)Math.ceil((health - 0.5 * this.getAttackPoints())); //  attaque = 1/2 x points d'attaque normaux
+        int newHealth = (int)Math.ceil((health - 0.5 * this.getAttackPoints()));
         enemy.setHealth(newHealth);
     }
     /**
@@ -19,7 +20,7 @@ public class HeroDefense extends Hero {
      * @param attackPoints the damage to be inflicted to the hero.
      */
     public void receiveDamage(int attackPoints) {
-        int newHealth = (int)Math.ceil((this.getHealth() - 0.5 * attackPoints)); //  degats = 1/2 x points d'attaque normaux
+        int newHealth = (int)Math.ceil((this.getHealth() - 0.5 * attackPoints));
         this.setHealth(newHealth);
     }
 }

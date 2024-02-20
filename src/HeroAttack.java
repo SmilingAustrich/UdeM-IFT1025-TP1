@@ -16,8 +16,8 @@ public class HeroAttack extends Hero {
         enemy.setHealth(newHealth);
     }
     /**
-     * Each hero handles receiving damage differently, so we need to override the method for every type of hero.
-     * HeroAttack gets inflicted double damage.
+     * Each character handles receiving damage differently, so we need to override the method for every type of hero.
+     * HeroAttack's attack = 2 * attack points
      * @param attackPoints the damage to be inflicted to the hero.
      */
     public void receiveDamage(int attackPoints) {

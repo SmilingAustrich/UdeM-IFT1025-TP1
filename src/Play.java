@@ -2,6 +2,7 @@ public abstract class Play {
 
     /**
      * Static method to create a Hero.
+     *
      * @param phrase the information about the hero.
      * @return the hero after instantiating it.
      */
@@ -27,15 +28,21 @@ public abstract class Play {
 
         if (heroName.toLowerCase().startsWith("a")) {
 
-            currentHero = new HeroAttack(heroName, heroHealth, heroAttackPoint, heroHealth, experience, level, enemiesKilled, isAlive);
+            currentHero = new HeroAttack(
+                    heroName, heroHealth, heroAttackPoint, heroHealth, experience, level, enemiesKilled, isAlive
+            );
 
         } else if (heroName.toLowerCase().startsWith("d")) {
 
-            currentHero = new HeroDefense(heroName, heroHealth, heroAttackPoint, heroHealth, experience, level, enemiesKilled, isAlive);
+            currentHero = new HeroDefense(
+                    heroName, heroHealth, heroAttackPoint, heroHealth, experience, level, enemiesKilled, isAlive
+            );
 
         } else {
 
-            currentHero = new HeroEquilibre(heroName, heroHealth, heroAttackPoint, heroHealth, experience, level, enemiesKilled, isAlive);
+            currentHero = new HeroEquilibre(
+                    heroName, heroHealth, heroAttackPoint, heroHealth, experience, level, enemiesKilled, isAlive
+            );
         }
 
         return currentHero;
@@ -43,6 +50,7 @@ public abstract class Play {
 
     /**
      * Static method to create an enemy.
+     *
      * @param heroEnemiesKilled the number of enemies that the hero killed are needed to generate the new enemy's stats.
      * @return the enemy after instantiating it.
      */
@@ -53,7 +61,7 @@ public abstract class Play {
         int enemyExperienceDrop = (heroEnemiesKilled * 8) + 35;
         boolean enemyIsAlive = true;
 
-        return new Enemy(enemyHealth, enemyAttackPoints ,enemyHealth, enemyExperienceDrop, enemyIsAlive);
+        return new Enemy(enemyHealth, enemyAttackPoints, enemyHealth, enemyExperienceDrop, enemyIsAlive);
 
     }
 }

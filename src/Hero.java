@@ -11,6 +11,9 @@ public abstract class Hero extends Character {
         this.heroName = heroName;
         this.enemiesKilled = enemiesKilled;
     }
+
+    // We redefine the toString method of the hero class to ouput the Hero's story
+    // Depending on the hero's health and the amount of enemies killed, a different scenario is chosen
     @Override
     public String toString(){
 
@@ -61,32 +64,41 @@ public abstract class Hero extends Character {
 
         return (int)Math.ceil((50 + level * 20 * Math.pow(1.1,level)));
     }
-    public void incrementLevel(){
+    /**
+     * method to level up a hero.
+     * We calculate the required experience and compare it with the current experience of the hero.
+     * If the current experience is bigger or equal to the required experience, the hero's stats are
+     * increased to the ones corresponding to the next level.
+     * @param enemyExperienceDrop, the xp that the enemy drops once killed.
+     */
 
-        int nextLevel = this.getLevel() + 1;
-
-        if( nextLevel <= 99){
-            int nextAttackPoint = this.getAttackPoints() + 6;
-            int nextMaxHealth = this.getMaxHealth() + 12;
-
-            this.setLevel(nextLevel);
-            this.setAttackPoints(nextAttackPoint);
-            this.setMaxHealth(nextMaxHealth);
-            this.setHealth(nextMaxHealth);
-            this.setExperience(0);
-        }
-    }
-    public void levelUp( Enemy enemy) {
+    public void levelUp( int enemyExperienceDrop) {
 
         int heroExperienceNeeded = this.computeExperienceRequired(this.getLevel() + 1);
 
-        int heroUpdatedExperience = enemy.getExperienceDrop() + this.getExperience();
+        int heroUpdatedExperience = enemyExperienceDrop + this.getExperience();
         this.setExperience(heroUpdatedExperience);
 
         if (heroUpdatedExperience >= heroExperienceNeeded) {
-            this.incrementLevel();
+            int nextLevel = this.getLevel() + 1;
 
+            if( nextLevel <= 99){ // We increment the hero's level and his stats as long as the hero's level isn't the max.
+                int nextAttackPoint = this.getAttackPoints() + 6;
+                int nextMaxHealth = this.getMaxHealth() + 12;
+
+                this.setLevel(nextLevel);
+                this.setAttackPoints(nextAttackPoint);
+                this.setMaxHealth(nextMaxHealth);
+                this.setHealth(nextMaxHealth);
+                this.setExperience(0);
+
+            }
         }
+
     }
+    /**
+     * abstract method to attack an enemy.
+     * @param enemy, hero attack enemies.
+     */
     abstract void attack(Enemy enemy); // method to attack enemies in general
 }
